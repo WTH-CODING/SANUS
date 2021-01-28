@@ -38,6 +38,10 @@ app.use("/api", reportRoutes);
 app.use("/check", (req,res)=>{
     res.send("Hanji serve chal raha sojao!");
 });
+app.use(express.static(__dirname + '/public'));
+app.get('/', function (req, res) {
+  res.send(__dirname + 'index.html');
+  });
 
 const httpServer = http.createServer(app);
 httpServer.listen(80, () => {
