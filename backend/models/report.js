@@ -6,6 +6,12 @@ var reportSchema = mongoose.Schema(
     result: {
       type: String,
     },
+    url: {
+      type: String,
+    },
+    testData: {
+      type: String
+    },
     testType: {
       type: String,
     },
