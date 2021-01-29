@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sanus/Views/Doctor/Auth/AuthScreen.dart' as doctorLogin;
+import 'package:sanus/Views/Normal/Auth/AuthScreen.dart' as userLogin;
 
 class UserSelector extends StatefulWidget {
   @override
@@ -24,17 +26,21 @@ class _UserSelectorState extends State<UserSelector> {
             ),
             Text(
               "Howdy,",
-              style: TextStyle(fontSize: 56),
+              style: TextStyle(fontSize: 48),
             ),
             Text(
               "You are ?",
-              style: TextStyle(fontSize: 32),
+              style: TextStyle(fontSize: 24),
             ),
             SizedBox(
               height: 16,
             ),
-            userCard("Doctor",(){}),
-            userCard("User",(){}),
+            userCard("Doctor",(){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>doctorLogin.AuthScreen()));
+            }),
+            userCard("User",(){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>userLogin.AuthScreen()));
+            }),
           ],
         ),
       ),
@@ -61,7 +67,7 @@ class _UserSelectorState extends State<UserSelector> {
         child: Center(
           child: ListTile(
             leading: Image.asset("assets/$userType.png"),
-            title: Text(userType,style: TextStyle(fontSize: 24, color: Colors.white),),
+            title: Text(userType,style: TextStyle(fontSize: 28, color: Colors.white),),
             trailing: MaterialButton(
               color: Colors.white30,
               shape: CircleBorder(),

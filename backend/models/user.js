@@ -48,6 +48,14 @@ var userSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    licenceNo : {
+      type: String,
+      trim: true,
+    },
+    expertise : {
+      type: String,
+      trim: true,
+    },
     gender: {
       type: String,
       trim: true,
@@ -60,6 +68,14 @@ var userSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    height: {
+      type: String,
+      trim: true,
+    },
+    weight: {
+      type: String,
+      trim: true,
+    },
     password: {
       type: String,
       required: true,
@@ -67,10 +83,6 @@ var userSchema = mongoose.Schema(
     role: {
       type: Number,
       default: 0, //0 - Normal User, 1 - Admin
-    },
-    dob: {
-      type: Date,
-      trim: true,
     },
     deviceToken: {
       type: String,
