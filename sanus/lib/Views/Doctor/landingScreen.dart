@@ -1,6 +1,7 @@
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:sanus/Views/Doctor/Profile/ProfileScreen.dart';
+import 'package:sanus/Views/Doctor/Reports/ReportScreen.dart';
 
 class LandingScreen extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
   static List<Widget> _widgetOptions = <Widget>[
     ProfileScreen(),
-    ProfileScreen(),
+    ReportScreen(),
     ProfileScreen(),
   ];
 
@@ -39,7 +40,7 @@ class _LandingScreenState extends State<LandingScreen> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           BottomNavigationBarItem(icon: Icon(Icons.folder), label: 'Reports'),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Appointments'),
+          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Doctors'),
         ],
         currentIndex: _selectedIndex,
         unselectedItemColor: Colors.black38,
