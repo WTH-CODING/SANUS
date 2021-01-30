@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:sanus/services/authService.dart';
 import '../landingScreen.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -9,7 +12,7 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   bool isLoginForm = true;
   String gender = "Male";
-
+  final scaffkey = new GlobalKey<ScaffoldState>();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController firstName = TextEditingController();
@@ -21,9 +24,35 @@ class _AuthScreenState extends State<AuthScreen> {
   TextEditingController height = TextEditingController();
   TextEditingController weight = TextEditingController();
 
+  signIn() async {
+    try {
+      var payload =
+          json.encode({"email": email.text, "password": password.text});
+      bool authenticated =
+          await AuthService.authenticate(email.text, password.text);
+      print(authenticated);
+      if (authenticated) {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (BuildContext context) {
+          return LandingScreen();
+        }), (Route<dynamic> route) => false);
+      } else {
+        scaffkey.currentState.showSnackBar(new SnackBar(
+          content: new Text("Authentication Failure!!!"),
+        ));
+      }
+    } catch (e) {
+      print(e);
+      scaffkey.currentState.showSnackBar(new SnackBar(
+        content: new Text("Authentication Failure!!!"),
+      ));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffkey,
       backgroundColor: Colors.grey[200],
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -44,64 +73,64 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
               isLoginForm
                   ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/User.png",
-                    height: 50,
-                  ),
-                  SizedBox(
-                    width: 16,
-                  ),
-                  Text(
-                    "User Sign In",
-                    style: TextStyle(
-                        fontSize: 32, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              )
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/User.png",
+                          height: 50,
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Text(
+                          "User Sign In",
+                          style: TextStyle(
+                              fontSize: 32, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    )
                   : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/User.png",
-                    height: 50,
-                  ),
-                  SizedBox(
-                    width: 16,
-                  ),
-                  Text(
-                    "User Sign Up",
-                    style: TextStyle(
-                        fontSize: 32, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/User.png",
+                          height: 50,
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Text(
+                          "User Sign Up",
+                          style: TextStyle(
+                              fontSize: 32, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
               SizedBox(
                 height: 16,
               ),
               isLoginForm
                   ? Container()
                   : inputField(
-                firstName,
-                Icon(
-                  Icons.person,
-                  color: Colors.black,
-                ),
-                "Enter First Name",
-                false,
-              ),
+                      firstName,
+                      Icon(
+                        Icons.person,
+                        color: Colors.black,
+                      ),
+                      "Enter First Name",
+                      false,
+                    ),
               isLoginForm
                   ? Container()
                   : inputField(
-                lastName,
-                Icon(
-                  Icons.person,
-                  color: Colors.black,
-                ),
-                "Enter Last Name",
-                false,
-              ),
+                      lastName,
+                      Icon(
+                        Icons.person,
+                        color: Colors.black,
+                      ),
+                      "Enter Last Name",
+                      false,
+                    ),
               isLoginForm ? Container() : dropDown(),
               inputField(
                 email,
@@ -115,69 +144,69 @@ class _AuthScreenState extends State<AuthScreen> {
               isLoginForm
                   ? Container()
                   : inputField(
-                age,
-                Icon(
-                  Icons.face,
-                  color: Colors.black,
-                ),
-                "Enter Age",
-                false,
-              ),
+                      age,
+                      Icon(
+                        Icons.face,
+                        color: Colors.black,
+                      ),
+                      "Enter Age",
+                      false,
+                    ),
               isLoginForm
                   ? Container()
                   : inputField(
-                phoneNo,
-                Icon(
-                  Icons.call,
-                  color: Colors.black,
-                ),
-                "Enter Phone No",
-                false,
-              ),
+                      phoneNo,
+                      Icon(
+                        Icons.call,
+                        color: Colors.black,
+                      ),
+                      "Enter Phone No",
+                      false,
+                    ),
               isLoginForm
                   ? Container()
                   : inputField(
-                city,
-                Icon(
-                  Icons.location_city,
-                  color: Colors.black,
-                ),
-                "Enter City",
-                false,
-              ),
+                      city,
+                      Icon(
+                        Icons.location_city,
+                        color: Colors.black,
+                      ),
+                      "Enter City",
+                      false,
+                    ),
               isLoginForm
                   ? Container()
                   : inputField(
-                address,
-                Icon(
-                  Icons.apartment,
-                  color: Colors.black,
-                ),
-                "Enter Address",
-                false,
-              ),
+                      address,
+                      Icon(
+                        Icons.apartment,
+                        color: Colors.black,
+                      ),
+                      "Enter Address",
+                      false,
+                    ),
               isLoginForm
                   ? Container()
                   : inputField(
-                height,
-                Icon(
-                  Icons.straighten,
-                  color: Colors.black,
-                ),
-                "Enter height in cm",
-                false,
-              ),
+                      height,
+                      Icon(
+                        Icons.straighten,
+                        color: Colors.black,
+                      ),
+                      "Enter height in cm",
+                      false,
+                    ),
               isLoginForm
                   ? Container()
                   : inputField(
-                weight,
-                Icon(
-                  Icons.fitness_center,
-                  color: Colors.black,
-                ),
-                "Enter weight in Kg",
-                false,
-              ),
+                      weight,
+                      Icon(
+                        Icons.fitness_center,
+                        color: Colors.black,
+                      ),
+                      "Enter weight in Kg",
+                      false,
+                    ),
               inputField(
                 password,
                 Icon(
@@ -189,13 +218,13 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
               Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 80.0, vertical: 32),
+                    const EdgeInsets.symmetric(horizontal: 80.0, vertical: 16),
                 child: MaterialButton(
                   color: Colors.black87,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)),
-                  onPressed: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LandingScreen()));
+                  onPressed: () async {
+                    await signIn();
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
@@ -204,15 +233,15 @@ class _AuthScreenState extends State<AuthScreen> {
                       children: [
                         isLoginForm
                             ? Text(
-                          "Sign In",
-                          style: TextStyle(
-                              fontSize: 24, color: Colors.white),
-                        )
+                                "Sign In",
+                                style: TextStyle(
+                                    fontSize: 24, color: Colors.white),
+                              )
                             : Text(
-                          "Sign Up",
-                          style: TextStyle(
-                              fontSize: 24, color: Colors.white),
-                        ),
+                                "Sign Up",
+                                style: TextStyle(
+                                    fontSize: 24, color: Colors.white),
+                              ),
                         SizedBox(
                           width: 16,
                         ),
@@ -227,28 +256,30 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
               isLoginForm
                   ? InkWell(
-                onTap: () {
-                  setState(() {
-                    isLoginForm = false;
-                  });
-                },
-                child: Text(
-                  "New user? Sign Up",
-                  style: TextStyle(fontSize: 18),
-                ),
-              )
+                      onTap: () {
+                        setState(() {
+                          isLoginForm = false;
+                        });
+                      },
+                      child: Text(
+                        "New user? Sign Up",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    )
                   : InkWell(
-                onTap: () {
-                  setState(() {
-                    isLoginForm = true;
-                  });
-                },
-                child: Text(
-                  "Already Registered? Sign In",
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              SizedBox(height: 24,)
+                      onTap: () {
+                        setState(() {
+                          isLoginForm = true;
+                        });
+                      },
+                      child: Text(
+                        "Already Registered? Sign In",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+              SizedBox(
+                height: 24,
+              )
             ],
           ),
         ),

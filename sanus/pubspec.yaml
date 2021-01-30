@@ -10,6 +10,8 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.0
   double_back_to_close_app: ^1.2.0
+  shared_preferences: ^0.5.12+4
+  http: ^0.12.2
 
 dev_dependencies:
   flutter_test:
