@@ -316,7 +316,7 @@
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
 }
 .travel-card-image.card2{
-    background: url(../images/brain-tumor.jpg);
+    background: url(../Images/brain-tumor.jpg);
     background-size: cover;
 }
 .travel-card-image.card3{
