@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 
 const path = require("path");
@@ -42,6 +43,10 @@ app.use(express.static(__dirname + "/public"));
 app.get("/", function (req, res) {
   res.send(__dirname + "index.html");
 });
+app.use(express.static(__dirname + '/public',  { dotfiles: 'allow' }));
+app.get('/', function (req, res) {
+  res.send(__dirname + 'index.html');
+  });
 
 const httpServer = http.createServer(app);
 httpServer.listen(80, () => {
