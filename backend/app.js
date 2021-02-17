@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 
 const path = require("path");
@@ -38,7 +39,7 @@ app.use("/api", reportRoutes);
 app.use("/check", (req,res)=>{
     res.send("Hanji serve chal raha sojao!");
 });
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public',  { dotfiles: 'allow' }));
 app.get('/', function (req, res) {
   res.send(__dirname + 'index.html');
   });
